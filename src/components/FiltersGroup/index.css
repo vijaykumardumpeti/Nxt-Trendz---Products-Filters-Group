@@ -1,0 +1,80 @@
+.filters-group-container {
+  margin-top: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  font-family: 'roboto';
+}
+
+@media screen and (min-width: 768px) {
+  .filters-group-container {
+    width: 30%;
+    max-width: 350px;
+    margin-top: 48px;
+    flex-shrink: 0;
+  }
+}
+
+/* Write your CSS here */
+
+.filter-buttons-container {
+  list-style-type: none;
+
+  padding-left: 0px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+
+  margin-top: 0px;
+}
+.category {
+  font-size: 17px;
+  font-weight: bold;
+  padding-left: 2px;
+}
+.button-stylings {
+  background-color: transparent;
+  border: 0px none transparent;
+
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+.ratings-container {
+  list-style-type: none;
+  padding-left: 0px;
+}
+.rating-image {
+  height: 30px;
+}
+.clear-filter-button {
+  padding: 10px;
+  color: #0967d2;
+  border: 2px solid #0f172a;
+  border-radius: 5px;
+  background-color: transparent;
+}
+.input-element {
+  background-color: #f1f5f9;
+  outline: none;
+  border: 0px none transparent;
+  height: 35px;
+  width: 260px;
+  border-radius: 10px;
+  color: black;
+}
+.input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f5f9;
+  border-radius: 10px;
+  color: black;
+
+  margin-bottom: 70px;
+}
