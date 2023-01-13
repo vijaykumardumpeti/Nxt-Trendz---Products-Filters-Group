@@ -76,10 +76,10 @@ class AllProductsSection extends Component {
   state = {
     apiStatus: apiStatusConstants.initial,
     productsList: [],
-    isLoading: false,
+
     activeOptionId: sortbyOptions[0].optionId,
-    category: '',
     titleSearch: '',
+    category: '',
     rating: '',
   }
 
@@ -88,9 +88,8 @@ class AllProductsSection extends Component {
   }
 
   getProducts = async () => {
-    const {category, titleSearch, rating} = this.state
+    const {category, rating, titleSearch} = this.state
     this.setState({
-      isLoading: true,
       apiStatus: apiStatusConstants.inProgress,
     })
     const jwtToken = Cookies.get('jwt_token')
@@ -124,8 +123,18 @@ class AllProductsSection extends Component {
     } else if (response.status === 401) {
       this.setState({
         apiStatus: apiStatusConstants.failure,
+        isLoading: false,
       })
     }
+  }
+
+  searchInputUpdation = event => {
+    this.setState(
+      {
+        titleSearch: event.target.value,
+      },
+      this.getProducts,
+    )
   }
 
   changeSortby = activeOptionId => {
@@ -158,6 +167,7 @@ class AllProductsSection extends Component {
     </div>
   )
 
+  // TODO: Add failure view
   failureView = () => (
     <div className="failure-container">
       <img
@@ -184,16 +194,16 @@ class AllProductsSection extends Component {
     }
   }
 
-  // TODO: Add failure view
-
   render() {
-    const {isLoading} = this.state
+    const {isLoading, titleSearch} = this.state
     console.log(isLoading)
 
     return (
       <div className="all-products-section">
         {/* TODO: Update the below element */}
         <FiltersGroup
+          titleSearch={titleSearch}
+          searchInputUpdation={this.searchInputUpdation}
           categoryOptions={categoryOptions}
           ratingsList={ratingsList}
         />

@@ -2,15 +2,26 @@ import {BiSearch} from 'react-icons/bi'
 import './index.css'
 
 const FiltersGroup = props => {
-  const {categoryOptions, ratingsList} = props // list
+  const {categoryOptions, ratingsList, searchInputUpdation, titleSearch} = props // list
+
+  const inputFunction = event => {
+    searchInputUpdation(event)
+  }
 
   return (
     <div className="filters-group-container">
       <div className="input-container">
-        <input type="search" className="input-element" />
+        <input
+          value={titleSearch}
+          onChange={inputFunction}
+          type="search"
+          className="input-element"
+        />
         <BiSearch className="search-icon" />
       </div>
+
       <p className="category">Category</p>
+
       <ul className="filter-buttons-container">
         {categoryOptions.map(eachObject => (
           <li key={eachObject.categoryId}>
@@ -20,7 +31,9 @@ const FiltersGroup = props => {
           </li>
         ))}
       </ul>
+
       <p className="category">Rating</p>
+
       <ul className="ratings-container">
         {ratingsList.map(ratingObject => (
           <li key={ratingObject.ratingId}>
@@ -33,6 +46,7 @@ const FiltersGroup = props => {
           </li>
         ))}
       </ul>
+
       <button className="clear-filter-button" type="button">
         Clear Filters
       </button>

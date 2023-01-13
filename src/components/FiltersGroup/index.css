@@ -63,9 +63,10 @@
   outline: none;
   border: 0px none transparent;
   height: 35px;
-  width: 260px;
+  width: 280px;
   border-radius: 10px;
   color: black;
+  padding-left: 15px;
 }
 .input-container {
   display: flex;
@@ -76,5 +77,9 @@
   border-radius: 10px;
   color: black;
 
-  margin-bottom: 70px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.search-icon {
+  margin-right: 5px;
 }
