@@ -97,7 +97,7 @@ class AllProductsSection extends Component {
     // TODO: Update the code to get products with filters applied
 
     const {activeOptionId} = this.state
-    const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&category=${category}&titleSearch=${titleSearch}&rating=${rating}`
+    const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&category=${category}&title_search=${titleSearch}&rating=${rating}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -117,13 +117,12 @@ class AllProductsSection extends Component {
       }))
       this.setState({
         productsList: updatedData,
-        isLoading: false,
+
         apiStatus: apiStatusConstants.success,
       })
     } else if (response.status === 401) {
       this.setState({
         apiStatus: apiStatusConstants.failure,
-        isLoading: false,
       })
     }
   }
@@ -131,9 +130,21 @@ class AllProductsSection extends Component {
   searchInputUpdation = event => {
     this.setState({titleSearch: event.target.value})
 
-    if (event.key === 'Enter') {
+    /*  if (event.key === 'Enter') {
       this.getProducts()
     }
+
+    */
+  }
+
+  filterData = () => {
+    this.getProducts()
+  }
+
+  filterByCategory = name => {
+    this.setState({
+      category: name,
+    })
   }
 
   changeSortby = activeOptionId => {
@@ -144,6 +155,17 @@ class AllProductsSection extends Component {
     const {productsList, activeOptionId} = this.state
 
     // TODO: Add No Products View
+    this.noProductsView = () => (
+      <div className="no-products-container">
+        <img
+          alt="no products"
+          src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-no-products-view.png"
+        />
+        <h1>No Products Found</h1>
+        <p>we could not find any products. Try other filters</p>
+      </div>
+    )
+
     return (
       <div className="all-products-container">
         <ProductsHeader
@@ -151,11 +173,16 @@ class AllProductsSection extends Component {
           sortbyOptions={sortbyOptions}
           changeSortby={this.changeSortby}
         />
-        <ul className="products-list">
-          {productsList.map(product => (
-            <ProductCard productData={product} key={product.id} />
-          ))}
-        </ul>
+
+        {productsList.length === 0 ? (
+          this.noProductsView()
+        ) : (
+          <ul className="products-list">
+            {productsList.map(product => (
+              <ProductCard productData={product} key={product.id} />
+            ))}
+          </ul>
+        )}
       </div>
     )
   }
@@ -194,13 +221,17 @@ class AllProductsSection extends Component {
   }
 
   render() {
-    const {isLoading, titleSearch} = this.state
-    console.log(isLoading)
+    const {titleSearch, category} = this.state
+    console.log(category)
 
     return (
       <div className="all-products-section">
         {/* TODO: Update the below element */}
+
         <FiltersGroup
+          assignCategoryObjectToState={this.assignCategoryObjectToState}
+          filterByCategory={this.filterByCategory}
+          filterData={this.filterData}
           titleSearch={titleSearch}
           searchInputUpdation={this.searchInputUpdation}
           categoryOptions={categoryOptions}
@@ -214,3 +245,4 @@ class AllProductsSection extends Component {
 }
 
 export default AllProductsSection
+
