@@ -2,10 +2,28 @@ import {BiSearch} from 'react-icons/bi'
 import './index.css'
 
 const FiltersGroup = props => {
-  const {categoryOptions, ratingsList, searchInputUpdation, titleSearch} = props // list
+  const {
+    categoryOptions,
+    ratingsList,
+    searchInputUpdation,
+    filterByCategory,
+    filterData,
+    titleSearch,
+  } = props // list
 
   const inputFunction = event => {
     searchInputUpdation(event)
+  }
+
+  const searchButtonClicked = () => {
+    filterData()
+  }
+
+  const filterButtonClicked = () => {
+    // categoryOptions.map(eachCategory => filterByCategory(eachCategory.name))
+    categoryOptions.forEach(eachCategory => {
+      filterByCategory(eachCategory.name)
+    })
   }
 
   return (
@@ -17,7 +35,13 @@ const FiltersGroup = props => {
           type="search"
           className="input-element"
         />
-        <BiSearch className="search-icon" />
+        <button
+          onClick={searchButtonClicked}
+          type="button"
+          className="search-button"
+        >
+          <BiSearch className="search-icon" />
+        </button>
       </div>
 
       <p className="category">Category</p>
@@ -25,7 +49,11 @@ const FiltersGroup = props => {
       <ul className="filter-buttons-container">
         {categoryOptions.map(eachObject => (
           <li key={eachObject.categoryId}>
-            <button className="button-stylings" type="button">
+            <button
+              onClick={filterButtonClicked}
+              className="button-stylings"
+              type="button"
+            >
               {eachObject.name}
             </button>
           </li>
@@ -55,3 +83,4 @@ const FiltersGroup = props => {
 }
 
 export default FiltersGroup
+
