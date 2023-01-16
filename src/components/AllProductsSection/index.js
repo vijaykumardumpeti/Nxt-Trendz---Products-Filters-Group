@@ -129,12 +129,11 @@ class AllProductsSection extends Component {
   }
 
   searchInputUpdation = event => {
-    this.setState(
-      {
-        titleSearch: event.target.value,
-      },
-      this.getProducts,
-    )
+    this.setState({titleSearch: event.target.value})
+
+    if (event.key === 'Enter') {
+      this.getProducts()
+    }
   }
 
   changeSortby = activeOptionId => {
