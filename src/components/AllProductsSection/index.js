@@ -79,8 +79,8 @@ class AllProductsSection extends Component {
 
     activeOptionId: sortbyOptions[0].optionId,
     titleSearch: '',
-    category: '',
-    rating: '',
+    categoryId: '',
+    ratingId: '',
   }
 
   componentDidMount() {
@@ -88,7 +88,7 @@ class AllProductsSection extends Component {
   }
 
   getProducts = async () => {
-    const {category, rating, titleSearch} = this.state
+    const {categoryId, ratingId, titleSearch} = this.state
     this.setState({
       apiStatus: apiStatusConstants.inProgress,
     })
@@ -97,7 +97,7 @@ class AllProductsSection extends Component {
     // TODO: Update the code to get products with filters applied
 
     const {activeOptionId} = this.state
-    const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&category=${category}&title_search=${titleSearch}&rating=${rating}`
+    const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&category=${categoryId}&title_search=${titleSearch}&rating=${ratingId}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -130,21 +130,38 @@ class AllProductsSection extends Component {
   searchInputUpdation = event => {
     this.setState({titleSearch: event.target.value})
 
-    /*  if (event.key === 'Enter') {
+    if (event.key === 'Enter') {
       this.getProducts()
     }
-
-    */
   }
 
-  filterData = () => {
-    this.getProducts()
+  filterByCategory = categoryId => {
+    this.setState(
+      {
+        categoryId,
+      },
+      this.getProducts,
+    )
   }
 
-  filterByCategory = name => {
-    this.setState({
-      category: name,
-    })
+  setRatingFunction = ratingId => {
+    this.setState(
+      {
+        ratingId,
+      },
+      this.getProducts,
+    )
+  }
+
+  clearFilters = () => {
+    this.setState(
+      {
+        titleSearch: '',
+        categoryId: '',
+        ratingId: '',
+      },
+      this.getProducts,
+    )
   }
 
   changeSortby = activeOptionId => {
@@ -221,7 +238,7 @@ class AllProductsSection extends Component {
   }
 
   render() {
-    const {titleSearch, category} = this.state
+    const {titleSearch, ratingId, category, categoryId} = this.state
     console.log(category)
 
     return (
@@ -229,6 +246,10 @@ class AllProductsSection extends Component {
         {/* TODO: Update the below element */}
 
         <FiltersGroup
+          clearFilters={this.clearFilters}
+          ratingId={ratingId}
+          setRatingFunction={this.setRatingFunction}
+          categoryId={categoryId}
           assignCategoryObjectToState={this.assignCategoryObjectToState}
           filterByCategory={this.filterByCategory}
           filterData={this.filterData}
