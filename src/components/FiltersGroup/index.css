@@ -83,3 +83,25 @@
 .search-icon {
   margin-right: 5px;
 }
+.search-button {
+  border: 0px none transparent;
+  background-color: transparent;
+}
+.apply-style {
+  color: #0967d2;
+  font-weight: bold;
+}
+.rating-single-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.rating-container-button {
+  border: 0px none transparent;
+  background-color: transparent;
+}
+.category-para {
+  margin-top: -2px;
+  margin-bottom: -2px;
+}
