@@ -54,3 +54,11 @@
   justify-content: space-between;
   align-items: center;
 }
+.no-products-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'roboto';
+}
+
