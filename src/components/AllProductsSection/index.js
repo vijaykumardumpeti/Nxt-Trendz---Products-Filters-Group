@@ -120,7 +120,7 @@ class AllProductsSection extends Component {
 
         apiStatus: apiStatusConstants.success,
       })
-    } else if (response.status === 401) {
+    } else {
       this.setState({
         apiStatus: apiStatusConstants.failure,
       })
@@ -179,7 +179,7 @@ class AllProductsSection extends Component {
           src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-no-products-view.png"
         />
         <h1>No Products Found</h1>
-        <p>we could not find any products. Try other filters</p>
+        <p>We could not find any products. Try other filters.</p>
       </div>
     )
 
@@ -218,7 +218,9 @@ class AllProductsSection extends Component {
         src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png"
       />
       <h1>Oops! Something Went Wrong</h1>
-      <p>We are having some trouble processing your request.please try again</p>
+      <p>
+        We are having some trouble processing your request.Please try again.
+      </p>
     </div>
   )
 
